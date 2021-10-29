@@ -14,3 +14,10 @@ export async function addCountry(country, last_update=new Date()){
     last_update: last_update
   });
 }
+
+export async function updateCountry(country_id, country, last_update=new Date()){
+  return await axios.put("http://localhost:8000/api/countries/" + country_id, {
+    country: country,
+    last_update: last_update
+  });
+}

@@ -10,13 +10,14 @@
       :country_id="country.country_id"
       :country="country.country"
       :last_update="country.last_update"
+      @update="renewCountry"
     />
   </div>
 </template>
 
 <script>
 import Country from "./components/Country.vue";
-import {getCountry,deleteCountry,addCountry} from "./http-common.js"
+import {getCountry,deleteCountry,addCountry,updateCountry} from "./http-common.js"
 export default {
   name: "App",
   components: {
@@ -54,7 +55,11 @@ export default {
       } catch (e){
         console.log(e);
       }
-    }
+    },
+    async renewCountry(country_id, country){
+      await updateCountry(country_id, country);
+      this.getCountryAll();
+    },
   },
   mounted() {
     this.getCountryAll();

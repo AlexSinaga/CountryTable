@@ -37,7 +37,7 @@ exports.findAll = (req, res) => {
     const country_id = req.query.country_id;
     var condition = country_id ? { country_id: { [Op.iLike]: `%${country_id}` } } : null;
 
-    Countries.findAll()
+    Countries.findAll({ order: [["country_id", "ASC"]] })
         .then(data => {
             res.send(data);
         })
